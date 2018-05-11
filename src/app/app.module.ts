@@ -11,6 +11,7 @@ import { PagesModule } from './pages/pages.module';
 
 // ROUTES
 import { APP_ROUTES } from './app.routes';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { APP_ROUTES } from './app.routes';
   imports: [
     BrowserModule,
     PagesModule,
+    FormsModule,  // Temporal
     APP_ROUTES
   ],
   providers: [],
