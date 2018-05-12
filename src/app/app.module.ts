@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 // COMPONENTS
 import { AppComponent } from './app.component';
@@ -9,9 +10,11 @@ import { RegisterComponent } from './login/register/register.component';
 // MODULES
 import { PagesModule } from './pages/pages.module';
 
+// SERVICES
+import { ServicesModule } from './services/services.module';
+
 // ROUTES
 import { APP_ROUTES } from './app.routes';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -23,6 +26,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     PagesModule,
     FormsModule,  // Temporal
+    ServicesModule,
     APP_ROUTES
   ],
   providers: [],
