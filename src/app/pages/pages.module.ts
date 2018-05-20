@@ -15,6 +15,9 @@ import { DoughnutChartComponent } from '../components/doughnut-chart/doughnut-ch
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromisesComponent } from './promises/promises.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { ProfileComponent } from './profile/profile.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -27,7 +30,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         DoughnutChartComponent,
         AccountSettingsComponent,
         PromisesComponent,
-        RxjsComponent
+        RxjsComponent,
+        ProfileComponent
     ],
     exports: [
         DashboardComponent,
@@ -36,10 +40,12 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         PagesComponent,
     ],
     imports: [
+        CommonModule,
         SharedModule,
         FormsModule,
         ChartsModule,
-        PAGES_ROUTES
+        PAGES_ROUTES,
+        PipesModule
     ]
 })
 
