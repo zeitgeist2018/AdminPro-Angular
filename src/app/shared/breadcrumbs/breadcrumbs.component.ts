@@ -44,7 +44,6 @@ export class BreadcrumbsComponent implements OnInit {
           return activationEnd.snapshot.firstChild === null;
         }),
         map(data => {
-          console.log(data);
           return data.snapshot.data;
         })
       );
