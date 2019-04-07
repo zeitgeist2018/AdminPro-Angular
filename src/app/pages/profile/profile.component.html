@@ -3,18 +3,18 @@
     <div class="col-lg-7">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">User Profile</h4>
+                <h4 class="card-title">{{ user.name }}</h4>
                 <h6 class="card-subtitle"></h6>
                 <form #form="ngForm" (ngSubmit)="updateProfile(form.value)" ngNativeValidate class="form p-t-20">
                     <div class="form-group">
-                        <label for="exampleInputuname">User Name</label>
+                        <label>User Name</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-user"></i></div>
                             <input [ngModel]="user.name" name="name" type="text" class="form-control" placeholder="Username" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputEmail1">Email address</label>
+                        <label>Email address</label>
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-email"></i></div>
                             <input [ngModel]="user.email" [disabled]="user.google" name="email" type="email" class="form-control" placeholder="Email" required>

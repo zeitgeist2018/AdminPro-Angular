@@ -102,13 +102,32 @@ export class UserService {
     const url = BASE_URL + '/users/' + user._id;
     return this._http.put(url, user, { headers: this.getHeaders(this.token) })
       .map((res: any) => {
-        this.saveOnStorage(this.token, res.user);
+        if (this.user._id === user._id) {
+          this.saveOnStorage(this.token, res.user);
+          
+        }
         return true;
       });
   }
 
   updateImage(image: File, userId: string) {
     return this._uploadFileService.uploadFile(image, 'users', userId);
+  }
+
+  getUsers(from: number = 0) {
+    const url = BASE_URL + '/users?from=' + from;
+    return this._http.get(url);
+  }
+
+  searchUsers(search: string) {
+    const url = BASE_URL + '/search/collection/users/' + search;
+    return this._http.get(url)
+      .map((res: any) => res.users);
+  }
+
+  deleteUser(user: User) {
+    const url = BASE_URL + '/users/' + user._id;
+    return this._http.delete(url, { headers: this.getHeaders(this.token) });
   }
 
 }
