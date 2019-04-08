@@ -10,8 +10,8 @@
         </div>
         <div class="modal-body text-center">
 
-          <img *ngIf="!tempImage" [src]="'xxx' | image" class="w150" alt="">
-          <img *ngIf="tempImage" [src]="tempImage" class="w150" alt="">
+          <img *ngIf="!tempImage" [src]="'xxx' | image" class="w150 img-rounded" alt="">
+          <img *ngIf="tempImage" [src]="tempImage" class="w150 img-rounded" alt="">
           <br/><br/><br/>
           <input (change)="imageChanged($event.target.files[0])" type="file" name="" id="">
 

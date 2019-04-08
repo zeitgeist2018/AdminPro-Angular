@@ -31,13 +31,13 @@
           <tbody>
           <tr *ngFor="let doctor of doctors">
             <td class="w70">
-              <img [src]="doctor.image | image:'hospital'" [alt]="doctor.name" class="img-50 pointer">
+              <img [src]="doctor.image | image:'doctor'" [alt]="doctor.name" class="img-50 img-rounded img-fluid pointer">
             </td>
             <td>
               {{ doctor.name }}
             </td>
             <td>
-              {{ doctor.hospital }}
+              {{ doctor.hospital.name }}
             </td>
             <td>
               <button [routerLink]="['/doctors', doctor._id]" class="btn btn-primary">

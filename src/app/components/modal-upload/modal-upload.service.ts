@@ -1,9 +1,15 @@
 import {EventEmitter, Injectable} from '@angular/core';
 
+export enum Type{
+  DOCTORS = 'doctors',
+  HOSPITALS = 'hospitals',
+  USERS = 'users'
+}
+
 @Injectable()
 export class ModalUploadService {
 
-  type: string;
+  type: Type;
   id: string;
   public hidden: string = 'hidden';
 
@@ -15,7 +21,7 @@ export class ModalUploadService {
     this.id = null;
   }
 
-  showModal(type: string, id: string) {
+  showModal(type: Type, id: string) {
     this.hidden = '';
     this.type = type;
     this.id = id;

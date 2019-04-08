@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Hospital} from "../../models/hospital.model";
 import {HospitalService} from "../../services/hospital/hospital.service";
-import {ModalUploadService} from "../../components/modal-upload/modal-upload.service";
+import {ModalUploadService, Type} from "../../components/modal-upload/modal-upload.service";
 
 declare var swal: any;
 
@@ -51,7 +51,7 @@ export class HospitalsComponent implements OnInit {
   }
 
   updateImage(hospital: Hospital) {
-    this.modalUploadService.showModal('hospitals', hospital._id);
+    this.modalUploadService.showModal(Type.HOSPITALS, hospital._id);
   }
 
   search(search: string) {

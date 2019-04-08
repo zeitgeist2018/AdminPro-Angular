@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/User.model';
+import {Component, OnInit} from '@angular/core';
+import {User} from '../../models/User.model';
 import {ModalUploadService, UserService} from '../../services/services.index';
+import {Type} from "../../components/modal-upload/modal-upload.service";
 //import * as swal from 'sweetalert';
 declare var swal: any;
 
@@ -28,7 +29,7 @@ export class UsersComponent implements OnInit {
   }
 
   showModal(id: string){
-    this.modalUploadService.showModal('users', id);
+    this.modalUploadService.showModal(Type.USERS, id);
   }
 
   loadUsers() {
