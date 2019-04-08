@@ -1,0 +1,26 @@
+<div class="black-overlay animated fadeIn" [ngClass]="modalUploadService.hidden">
+  <div class="modal" tabindex="-1" role="dialog" style="display: block;">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Upload picture</h5>
+          <button type="button" class="pointer" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-center">
+
+          <img *ngIf="!tempImage" [src]="'xxx' | image" class="w150" alt="">
+          <img *ngIf="tempImage" [src]="tempImage" class="w150" alt="">
+          <br/><br/><br/>
+          <input (change)="imageChanged($event.target.files[0])" type="file" name="" id="">
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="uploadImage()" [disabled]="!tempImage" class="btn btn-primary">Upload image</button>
+          <button type="button" (click)="closeModal()" class="btn btn-secondary">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

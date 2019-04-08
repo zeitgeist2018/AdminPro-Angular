@@ -1,0 +1,70 @@
+<div class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <input #input (keyup)="searchUsers(input.value)" type="text" class="form-control" placeholder="Search users">
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="loading" class="row animated fadeIn">
+  <div class="col-sm-12">
+    <div class="alert alert-warning text-center">
+      <strong>Loading...</strong>
+      <br>
+      <i class="fa fa-refresh fa-spin fa-2x"></i>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!loading" class="row animated fadeIn">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">Registered Users (
+          <small>{{ count }}</small>)</h3>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Image</th>
+              <th>Email</th>
+              <th>Username</th>
+              <th>Role</th>
+              <th>Auth</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td class="w70">
+                <img [src]="user.image | image" (click)="showModal(user._id)" [alt]="user.name" class="img-50 img-circle pointer">
+              </td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.name }}</td>
+              <select [(ngModel)]="user.role" name="role" class="form-control">
+                <option value="ROLE_ADMIN">Admin</option>
+                <option value="ROLE_USER">User</option>
+              </select>
+              <!-- <td>{{ user.role }}</td> -->
+              <td>
+                <label *ngIf="user.google" class="label label-danger">Google</label>
+                <label *ngIf="!user.google" class="label label-primary">Password</label>
+              </td>
+              <td>
+                <button (click)="saveUser(user)" class="btn btn-primary">
+                  <i class="fa fa-save"></i>
+                </button>
+                <button (click)="deleteUser(user)" class="btn btn-danger">
+                  <i class="fa fa-trash-o"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <button (click)="paginate(-5)" class="btn btn-secondary">Previous</button>
+        <button (click)="paginate(5)" class="btn btn-secondary">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
