@@ -9,8 +9,6 @@ import { RegisterComponent } from './login/register/register.component';
 
 // MODULES
 import { PagesModule } from './pages/pages.module';
-
-// SERVICES
 import { ServicesModule } from './services/services.module';
 
 // ROUTES

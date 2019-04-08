@@ -20,7 +20,10 @@ import { ProfileComponent } from './profile/profile.component';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users/users.component';
 import {RegisterComponent} from "../login/register/register.component";
-import {ModalUploadComponent} from "../components/modal-upload/modal-upload.component";
+import { ModalUploadComponent } from "../components/modal-upload/modal-upload.component";
+import { HospitalsComponent } from './hospitals/hospitals.component';
+import { DoctorComponent } from './doctors/doctor.component';
+import { DoctorsComponent } from './doctors/doctors.component';
 
 
 @NgModule({
@@ -36,7 +39,10 @@ import {ModalUploadComponent} from "../components/modal-upload/modal-upload.comp
         RxjsComponent,
         ProfileComponent,
         UsersComponent,
-        ModalUploadComponent
+        ModalUploadComponent,
+        HospitalsComponent,
+        DoctorComponent,
+        DoctorsComponent
     ],
     exports: [
         DashboardComponent,
