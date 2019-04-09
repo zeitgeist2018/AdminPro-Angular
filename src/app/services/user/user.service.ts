@@ -1,20 +1,35 @@
-import { Injectable } from '@angular/core';
-import { User } from '../../models/User.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BASE_URL } from '../../config/config';
+import {Injectable} from '@angular/core';
+import {User} from '../../models/User.model';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {BASE_URL} from '../../config/config';
 import 'rxjs/add/operator/map';
-import { UploadFileService } from '../uploadFile/upload-file.service';
+import 'rxjs/add/operator/catch';
+import {UploadFileService} from '../uploadFile/upload-file.service';
+import * as swal from "sweetalert";
+import {Observable} from "rxjs";
 
 @Injectable()
 export class UserService {
 
   user: User;
   token: string;
+  menu: any = [];
 
   constructor(private _http: HttpClient,
-    private _uploadFileService: UploadFileService) {
-    this.loadToken();
-    this.loadUser();
+              private _uploadFileService: UploadFileService) {
+    this.loadLocalStorage();
+  }
+
+  private loadLocalStorage() {
+    if (localStorage.getItem('token')) {
+      this.loadToken();
+      this.loadUser();
+      this.loadMenu();
+    } else {
+      this.user = null;
+      this.token = '';
+      this.menu = null;
+    }
   }
 
   private loadUser() {
@@ -38,11 +53,16 @@ export class UserService {
     this.token = localStorage.getItem('token');
   }
 
-  saveOnStorage(token: string, user: User) {
+  private loadMenu() {
+    this.menu = JSON.parse(localStorage.getItem('menu'));
+  }
+
+  saveOnStorage(id: string, token: string, user: User, menu: any = this.menu) {
+    localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
-    this.loadToken();
-    this.loadUser();
+    localStorage.setItem('menu', JSON.stringify(menu));
+    this.loadLocalStorage();
   }
 
   isAuthenticated(): boolean {
@@ -53,8 +73,13 @@ export class UserService {
     const url = BASE_URL + '/users';
     return this._http.post(url, user)
       .map((res: any) => {
-        this.saveOnStorage(res.token, res.user);
+        this.saveOnStorage(res.user._id, res.token, res.user, res.menu);
         return res.user;
+      })
+      .catch(err => {
+        const message = err.error.errors.message;
+        swal(err.error.message, message, 'warning');
+        return Observable.throw(err);
       });
   }
 
@@ -66,9 +91,9 @@ export class UserService {
 
   loginWithGoogle(token: string) {
     const url = BASE_URL + '/login/google';
-    return this._http.post(url, null, { headers: this.getHeaders(token) })
+    return this._http.post(url, null, {headers: this.getHeaders(token)})
       .map((res: any) => {
-        this.saveOnStorage(res.token, res.user);
+        this.saveOnStorage(res.user._id, res.token, res.user, res.menu);
         return true;
       });
   }
@@ -82,16 +107,23 @@ export class UserService {
     }
     return this._http.post(url, user)
       .map((res: any) => {
-        this.saveOnStorage(res.token, res.user);
+        this.saveOnStorage(res.user._id, res.token, res.user, res.menu);
         return res;
+      })
+      .catch(err => {
+        const message = err.error.message;
+        swal('Login error', message, 'error');
+        return Observable.throw(err);
       });
   }
 
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('menu');
     this.token = null;
     this.user = null;
+    this.menu = null;
   }
 
   getSavedEmail(): string {
@@ -100,18 +132,29 @@ export class UserService {
 
   updateUser(user: User) {
     const url = BASE_URL + '/users/' + user._id;
-    return this._http.put(url, user, { headers: this.getHeaders(this.token) })
+    return this._http.put(url, user, {headers: this.getHeaders(this.token)})
       .map((res: any) => {
         if (this.user._id === user._id) {
-          this.saveOnStorage(this.token, res.user);
-          
+          this.saveOnStorage(user._id, this.token, res.user, this.menu);
         }
         return true;
+      })
+      .catch(err => {
+        const message = err.error.errors.message;
+        swal(err.error.message, message, 'warning');
+        return Observable.throw(err);
       });
   }
 
   updateImage(image: File, userId: string) {
-    return this._uploadFileService.uploadFile(image, 'users', userId);
+    return this._uploadFileService.uploadFile(image, 'users', userId)
+      .then((res: any) => {
+        this.user.image = res.user.image;
+        swal('Picture updated', 'Picture updated successfully', 'success');
+        this.saveOnStorage(userId, this.token, this.user, this.menu);
+      }).catch(err => {
+        console.error(err);
+      });
   }
 
   getUsers(from: number = 0) {
@@ -127,7 +170,7 @@ export class UserService {
 
   deleteUser(user: User) {
     const url = BASE_URL + '/users/' + user._id;
-    return this._http.delete(url, { headers: this.getHeaders(this.token) });
+    return this._http.delete(url, {headers: this.getHeaders(this.token)});
   }
 
 }

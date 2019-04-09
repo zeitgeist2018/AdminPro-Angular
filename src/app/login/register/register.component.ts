@@ -29,12 +29,16 @@ export class RegisterComponent implements OnInit {
       terms: new FormControl(false)
     }, { validators: this.equals('password', 'password2') });
 
+    this.fillSampleData();
+  }
+
+  fillSampleData(){
     this.form.setValue({
       name: 'Test',
       email: 'test@test.com',
       password: '123456',
       password2: '123456',
-      terms: true
+      terms: false
     });
   }
 

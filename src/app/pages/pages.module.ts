@@ -24,6 +24,7 @@ import { ModalUploadComponent } from "../components/modal-upload/modal-upload.co
 import { HospitalsComponent } from './hospitals/hospitals.component';
 import { DoctorComponent } from './doctors/doctor.component';
 import { DoctorsComponent } from './doctors/doctors.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { DoctorsComponent } from './doctors/doctors.component';
         ModalUploadComponent,
         HospitalsComponent,
         DoctorComponent,
-        DoctorsComponent
+        DoctorsComponent,
+        SearchComponent
     ],
     exports: [
         DashboardComponent,

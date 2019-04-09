@@ -8,6 +8,7 @@ import {
   SidebarService,
   UserService,
   AuthGuard,
+  AdminGuard,
   UploadFileService,
   ModalUploadService,
   HospitalService,
@@ -26,6 +27,7 @@ import {
     UserService,
     UploadFileService,
     AuthGuard,
+    AdminGuard,
     ModalUploadService,
     HospitalService,
     DoctorService

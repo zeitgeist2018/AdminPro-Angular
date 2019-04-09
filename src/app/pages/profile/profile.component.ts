@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
       .then((res: any) => {
         if (res.ok === true) {
           swal('Success!', 'Your picture has been updated', 'success');
-          this._userService.saveOnStorage(this._userService.token, res.user);
+          this._userService.saveOnStorage(res.user._id, this._userService.token, res.user);
         }
       }).catch(err => {
         console.log(err);
