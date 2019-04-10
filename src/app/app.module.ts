@@ -8,24 +8,26 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './login/register/register.component';
 
 // MODULES
-import { PagesModule } from './pages/pages.module';
 import { ServicesModule } from './services/services.module';
 
 // ROUTES
 import { APP_ROUTES } from './app.routes';
+import {PagesComponent} from "./pages/pages.component";
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    PagesComponent
   ],
   imports: [
     BrowserModule,
-    PagesModule,
     FormsModule,  // Temporal
     ReactiveFormsModule,
     ServicesModule,
+    SharedModule,
     APP_ROUTES
   ],
   providers: [],

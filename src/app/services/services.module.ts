@@ -7,12 +7,13 @@ import {
   SharedService,
   SidebarService,
   UserService,
-  AuthGuard,
-  AdminGuard,
   UploadFileService,
   ModalUploadService,
   HospitalService,
-  DoctorService
+  DoctorService,
+  AuthGuard,
+  AdminGuard,
+  VerifyTokenGuard
 } from './services.index';
 
 @NgModule({
@@ -26,11 +27,12 @@ import {
     SidebarService,
     UserService,
     UploadFileService,
-    AuthGuard,
-    AdminGuard,
     ModalUploadService,
     HospitalService,
-    DoctorService
+    DoctorService,
+    AuthGuard,
+    AdminGuard,
+    VerifyTokenGuard
   ],
   declarations: []
 })

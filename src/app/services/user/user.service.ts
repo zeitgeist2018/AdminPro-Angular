@@ -7,6 +7,7 @@ import 'rxjs/add/operator/catch';
 import {UploadFileService} from '../uploadFile/upload-file.service';
 import * as swal from "sweetalert";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class UserService {
@@ -16,8 +17,26 @@ export class UserService {
   menu: any = [];
 
   constructor(private _http: HttpClient,
-              private _uploadFileService: UploadFileService) {
+              private _uploadFileService: UploadFileService,
+              private router: Router) {
     this.loadLocalStorage();
+  }
+
+  refreshToken() {
+    let url = BASE_URL + '/login/refresh-token?token=' + this.token;
+    return this._http.get(url)
+      .map((res: any) => {
+        this.token = res.token;
+        localStorage.setItem('token', this.token);
+        console.log('Token refreshed');
+        return true;
+      })
+      .catch(err => {
+        this.router.navigate(['/login']);
+        const message = err.error.errors.message;
+        swal('Session error', 'We couldn\'t renew your session', 'warning');
+        return Observable.throw(err);
+      });
   }
 
   private loadLocalStorage() {

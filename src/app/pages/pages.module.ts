@@ -19,8 +19,6 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ProfileComponent } from './profile/profile.component';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users/users.component';
-import {RegisterComponent} from "../login/register/register.component";
-import { ModalUploadComponent } from "../components/modal-upload/modal-upload.component";
 import { HospitalsComponent } from './hospitals/hospitals.component';
 import { DoctorComponent } from './doctors/doctor.component';
 import { DoctorsComponent } from './doctors/doctors.component';
@@ -32,7 +30,6 @@ import { SearchComponent } from './search/search.component';
         DashboardComponent,
         ProgressComponent,
         Graphs1Component,
-        PagesComponent,
         IncrementComponent,  // Temporal,
         DoughnutChartComponent,
         AccountSettingsComponent,
@@ -40,7 +37,6 @@ import { SearchComponent } from './search/search.component';
         RxjsComponent,
         ProfileComponent,
         UsersComponent,
-        ModalUploadComponent,
         HospitalsComponent,
         DoctorComponent,
         DoctorsComponent,
@@ -49,8 +45,7 @@ import { SearchComponent } from './search/search.component';
     exports: [
         DashboardComponent,
         ProgressComponent,
-        Graphs1Component,
-        PagesComponent,
+        Graphs1Component
     ],
     imports: [
         CommonModule,

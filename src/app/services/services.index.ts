@@ -9,4 +9,5 @@ export {DoctorService}from './doctor/doctor.service';
 
 export {AuthGuard} from './guards/auth-guard.guard';
 export {AdminGuard} from "./guards/admin.guard";
+export {VerifyTokenGuard} from "./guards/verify-token.guard";
 
